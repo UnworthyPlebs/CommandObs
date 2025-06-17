@@ -292,9 +292,3 @@ def test_database_setup():
         print(f"Columns in {table_name}")
         table_names = inspector.get_table_names()
         print(f'Tables found: {table_names}')
-
-
-if __name__ == '__main__':
-    test_database_setup()
-    print('Starting flask app')
-    app.run(host='0.0.0.0', debug=True)
