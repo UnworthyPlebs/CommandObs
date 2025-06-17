@@ -8,52 +8,106 @@
             color: #ffffff;
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 5vw;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
+
         h1 {
             color: #ffffff;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 4vw;
+            font-size: 2.5rem;
+            line-height: 1.2;
         }
+
         #status {
             text-align: center;
-            margin-bottom: 20px;
-            padding: 10px;
+            margin-bottom: 4vw;
+            padding: 4vw 3vw;
             background: #404040;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-size: 1.3rem;
+            line-height: 1.4;
         }
+
         .scene-list {
-            height: 400px;
+            height: 800px;
             overflow-y: scroll;
-            padding: 10px;
-            /* Hide scrollbar for webkit browsers */
-            scrollbar-width: none; /* Firefox */
-            -ms-overflow-style: none; /* IE and Edge */
+            padding: 3vw;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            border-radius: 8px;
+            background: rgba(64, 64, 64, 0.3);
         }
+
         .scene-list::-webkit-scrollbar {
-            display: none; /* Chrome, Safari and Opera */
+            display: none;
         }
+
         .scene-button {
             display: block;
             width: 100%;
-            padding: 15px;
-            margin: 5px 0;
-            font-size: 16px;
-            border: 2px solid #555;
+            padding: 45px 20px;
+            margin: 15px 0;
+            font-size: 48px;
+            font-weight: 500;
+            border: 3px solid #555;
             background: #404040;
             color: #ffffff;
             cursor: pointer;
-            border-radius: 5px;
-            transition: all 0.2s ease;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 88px;
         }
+
         .scene-button:hover {
             background: #555555;
             border-color: #777;
+            transform: translateY(-2px);
         }
+
+        .scene-button:active {
+            transform: translateY(0);
+        }
+
         .scene-button.active {
             background: #4CAF50;
             color: white;
             border-color: #45a049;
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 3vw;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .scene-button {
+                font-size: 40px;
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .scene-button {
+                font-size: 36px;
+                padding: 35px 12px;
+            }
+            
+            .scene-list {
+                height: 70vh;
+            }
         }
     </style>
 </head>
