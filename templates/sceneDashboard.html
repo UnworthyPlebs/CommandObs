@@ -75,7 +75,7 @@
 
             try {
                 // Fetch scenes
-                const response = await fetch(`/api/obs/scenes?token=${token}`);
+                const response = await fetch(`/api/quickSession?token=${token}`);
                 const data = await response.json();
                 
                 if (!data.success) {
