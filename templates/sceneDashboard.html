@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OBS Dashboard</title>
+    <style>
+        body {
+            background-color: #2b2b2b;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #status {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #404040;
+            border-radius: 5px;
+        }
+        .scene-list {
+            height: 400px;
+            overflow-y: scroll;
+            padding: 10px;
+            /* Hide scrollbar for webkit browsers */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+        .scene-list::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        .scene-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 5px 0;
+            font-size: 16px;
+            border: 2px solid #555;
+            background: #404040;
+            color: #ffffff;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: all 0.2s ease;
+        }
+        .scene-button:hover {
+            background: #555555;
+            border-color: #777;
+        }
+        .scene-button.active {
+            background: #4CAF50;
+            color: white;
+            border-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>OBS Scene Dashboard</h1>
+    <div id="status">Loading scenes...</div>
+    <div id="scene-list" class="scene-list"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get('token');
+        let currentScene = '';
+
+        async function loadScenes() {
+            if (!token) {
+                document.getElementById('status').innerHTML = 'Error: No token found';
+                return;
+            }
+
+            try {
+                // Fetch scenes
+                const response = await fetch(`/api/obs/scenes?token=${token}`);
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to load scenes');
+                }
+
+                // Get current scene
+                const currentResponse = await fetch(`/api/current_scene?token=${token}`);
+                const currentData = await currentResponse.json();
+                currentScene = currentData.current_scene;
+
+                // Render scenes
+                renderScenes(data.scenes);
+                document.getElementById('status').innerHTML = `Connected! Current scene: ${currentScene}`;
+            } catch (error) {
+                document.getElementById('status').innerHTML = `Error: ${error.message}`;
+                console.error('Error loading scenes:', error);
+            }
+        }
+
+        function renderScenes(scenes) {
+            const sceneList = document.getElementById('scene-list');
+            sceneList.innerHTML = '';
+
+            scenes.forEach(scene => {
+                const button = document.createElement('button');
+                button.className = 'scene-button';
+                button.textContent = scene.sceneName;
+                
+                if (scene.sceneName === currentScene) {
+                    button.classList.add('active');
+                }
+
+                button.onclick = () => switchScene(scene.sceneName, button);
+                sceneList.appendChild(button);
+            });
+        }
+
+        async function switchScene(sceneName, buttonElement) {
+            if (sceneName === currentScene) return;
+
+            try {
+                const response = await fetch(`/api/obs/scenes/${sceneName}?token=${token}`, {
+                    method: 'POST'
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    // Update UI
+                    document.querySelectorAll('.scene-button').forEach(btn => btn.classList.remove('active'));
+                    buttonElement.classList.add('active');
+                    currentScene = sceneName;
+                    document.getElementById('status').innerHTML = `Switched to: ${sceneName}`;
+                } else {
+                    document.getElementById('status').innerHTML = `Failed to switch to: ${sceneName}`;
+                }
+            } catch (error) {
+                document.getElementById('status').innerHTML = `Error switching scene: ${error.message}`;
+            }
+        }
+
+        // Load scenes when page loads
+        loadScenes();
+    </script>
+</body>
+</html>

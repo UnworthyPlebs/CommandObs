@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+form {
+    background-color: #3a3a3a;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 400px;
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Updated to include all input types used in your forms */
+input[type="text"],
+input[type="password"],
+input[type="url"],
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #555555;
+    border-radius: 5px;
+    background-color: #4a4a4a;
+    color: #ffffff;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #777777;
+    background-color: #505050;
+}
+
+/* Checkbox styling */
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+    transform: scale(1.2);
+    accent-color: #666666;
+}
+
+/* Checkbox container */
+div:has(input[type="checkbox"]) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+div:has(input[type="checkbox"]) label {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #666666;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #777777;
+}
+
+input[type="submit"]:active {
+    background-color: #555555;
+}
+
+p {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* Error message styling */
+p[style*="red"] {
+    color: #ff6b6b !important;
+    font-size: 13px;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    form {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+}

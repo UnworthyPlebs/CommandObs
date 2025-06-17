@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quick Connect</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quick Connect</title>
+    <link rel="stylesheet" href="{{ url_for('serve_css') }}">
+</head>
+<body>
+    <h1>Quick Connect</h1>
+    
+    <form method="POST">
+        {{form.hidden_tag()}}
+
+        <div>
+            {{form.name.label()}}
+            {{form.name()}}
+            
+            {% for error in form.name.errors%}
+                <p style = "color: red;">{{error}}</p>
+            {%endfor%}
+        </div>
+        <div>
+            {{form.host.label()}}
+            {{form.host()}}
+
+            {%for error in form.host.errors%}
+                <p style = "color: red;">{{error}}</p>
+            {%endfor%}
+        </div>
+        <div>
+            {{form.password.label()}}
+            {{form.password()}}
+
+            {%for error in form.password.errors%}
+                <p style = "color: red;">{{error}}</p>
+            {%endfor%}
+        </div>
+        {{form.submit()}}
+    </form>
+</body>
+</html>

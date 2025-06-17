@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log in</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log in</title>
+    <link rel="stylesheet" href="goodstyles.css">
+    
+</head>
+<body>
+    <h1>Log into your account</h1>
+    
+    <form method="POST">
+        {{form.hidden_tag()}}
+
+        <div>
+            {{form.username.label()}}
+            {{form.username()}}
+            
+            {% for error in form.username.errors%}
+                <p style = "color: red;">{{error}}</p>
+            {%endfor%}
+        </div>
+        <div>
+            {{form.password.label()}}
+            {{form.password()}}
+
+            {%for error in form.password.errors%}
+                <p style = "color: red;">{{error}}</p>
+            {%endfor%}
+        </div>
+        <div>
+            {{form.remember.label()}}
+            {{form.remember()}}
+
+            {%for error in form.remember.errors%}
+                <p style = "color: red;">{{error}}</p>
+            {%endfor%}
+        </div>
+        {{form.submit()}}
+    </form>
+</body>
+</html>
