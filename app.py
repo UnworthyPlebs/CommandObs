@@ -168,7 +168,7 @@ def fetchQuickScenes():
     
     return jsonify({
         'success':True,
-        'scenes': [scene['sceneName'] for scene in scenes_result['data']],
+        'data': [scene['sceneName'] for scene in scenes_result['data']],
         'token': token
     })
 @app.route('/api/server_instances',methods = ["GET", "POST"])
