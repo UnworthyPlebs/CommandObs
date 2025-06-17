@@ -167,7 +167,7 @@ def fetchQuickScenes():
         return jsonify({'error': 'Failed to get scenes'}), 500
     
     return jsonify({
-        'connected':True,
+        'success':True,
         'scenes': [scene['sceneName'] for scene in scenes_result['data']],
         'token': token
     })
