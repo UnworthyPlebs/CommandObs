@@ -292,3 +292,7 @@ def test_database_setup():
         print(f"Columns in {table_name}")
         table_names = inspector.get_table_names()
         print(f'Tables found: {table_names}')
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=False)
