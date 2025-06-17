@@ -88,7 +88,7 @@
                 currentScene = currentData.current_scene;
 
                 // Render scenes
-                renderScenes(data.scenes);
+                renderScenes(data.data);
                 document.getElementById('status').innerHTML = `Connected! Current scene: ${currentScene}`;
             } catch (error) {
                 document.getElementById('status').innerHTML = `Error: ${error.message}`;
