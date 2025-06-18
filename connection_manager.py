@@ -37,7 +37,7 @@ class OBSConnectionManager():
     def start_monitoring(self):
         thread = threading.Thread(target=self.monitor_connections)
         thread.daemon = True
-        thread.start
+        thread.start()
 
     def cleanup_expired(self, timeout_minutes=1000):
         cutoff = datetime.now() - timedelta(minutes=timeout_minutes)
