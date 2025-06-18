@@ -171,6 +171,7 @@ def fetchQuickScenes():
         'data': scenes_result['data'],
         'token': token
     })
+
 @app.route('/api/server_instances',methods = ["GET", "POST"])
 @login_required
 def server_instances():

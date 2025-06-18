@@ -16,7 +16,6 @@ class OBSclient:
                 return False
             self.client.get_version()
             return True
-        
         except:
             return False
 
@@ -28,14 +27,13 @@ class OBSclient:
             except:
                 return False
     
-    def ensure_Connection(self):
-        if not self.client:
+    def reconnect(self):
+        if not self.isConnected():
             try:
-                self.client = obs.ReqClient(host = self.host, port = self.port, password = self.password)
-                return True
-            except:
-                self.ensure_Connection()
-                
+                self.connect()
+            except Exception as e:
+                return f'Error: {e}'
+        return 'Connected'
                 
     def get_scenes(self):
         if not self.isConnected():
