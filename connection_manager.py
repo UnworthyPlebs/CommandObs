@@ -28,7 +28,8 @@ class OBSConnectionManager():
     def monitor_connections(self):
         while self.monitoring:
             print('Checking connections...')
-            for token, client_info in self.connections.items():
+            connections_snapshot = list(self.connections.items())
+            for token, client_info in connections_snapshot:
                 client = client_info['client']
                 if not client.isConnected():
                     print('Attemting to reconnect client')
@@ -50,4 +51,4 @@ class OBSConnectionManager():
             self.remove_connection(token)
     
 connection_manager = OBSConnectionManager()
-connection_manager.start_monitoring
+connection_manager.start_monitoring()
